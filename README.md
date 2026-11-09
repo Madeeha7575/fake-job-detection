@@ -32,6 +32,7 @@ The dataset contains **3000 job postings** with **25 features**, including:
 
 
  0 - Real Job 
+
  1 - Fake Job 
 
 
@@ -96,7 +97,8 @@ Fake Jobs (1): 98%
 
 **Confusion Matrix**
 
-Actual / Predicted	Real	Fake
+Actual / Predicted	Real	Fake:
+
 Real	306	3
 
 Fake	10	281
