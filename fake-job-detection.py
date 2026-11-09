@@ -13,20 +13,30 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report
 )
+
+# Load dataset
 df = pd.read_csv("fake_real_job_postings_3000x25.csv")
 
+# Clean text and remove stopwords
 stop_words = set(stopwords.words("english"))
 
 def clean_text(text):
-
     text = str(text)
     text = text.lower()
 
-    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    text = re.sub(
+        r'[^a-zA-Z\s]',
+        '',
+        text
+    )
 
     words = text.split()
 
-    words = [word for word in words if word not in stop_words]
+    words = [
+        word
+        for word in words
+        if word not in stop_words
+    ]
 
     return " ".join(words)
 
@@ -35,6 +45,7 @@ df["cleaned_description"] = (
     .apply(clean_text)
 )
 
+# Convert text into numerical features
 vectorizer = TfidfVectorizer()
 
 X = vectorizer.fit_transform(
@@ -43,6 +54,7 @@ X = vectorizer.fit_transform(
 
 y = df["is_fake"]
 
+# Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -50,6 +62,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
+# Train model
 model = LogisticRegression()
 
 model.fit(
@@ -57,10 +70,12 @@ model.fit(
     y_train
 )
 
+# Make predictions
 predictions = model.predict(
     X_test
 )
 
+# Evaluate model
 accuracy = accuracy_score(
     y_test,
     predictions
@@ -76,8 +91,18 @@ cm = confusion_matrix(
 print("\nConfusion Matrix:")
 print(cm)
 
-print(classification_report(y_test,predictions))
+print(
+    "\nClassification Report:\n"
+)
 
+print(
+    classification_report(
+        y_test,
+        predictions
+    )
+)
+
+# Visualize confusion matrix
 plt.figure(figsize=(6, 5))
 
 sns.heatmap(
@@ -92,9 +117,4 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 
 plt.savefig(
-    "confusion_matrix.png",
-    dpi=300,
-    bbox_inches="tight"
-)
-
-plt.show()
+    "confusion
