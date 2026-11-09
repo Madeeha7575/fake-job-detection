@@ -56,10 +56,10 @@ The dataset contains **3000 job postings** with **25 features**, including:
 ### 2. TF-IDF Vectorization
 
 Converted text data into numerical features and the final TF-IDF matrix contained:
-
+```text
 3000 Documents
-
 17 Text Features
+```
 
 
 ### 3. Train-Test Split
@@ -69,7 +69,40 @@ Training Data: 80%
 Testing Data: 20%
 ```
 
-Result:
+**Model Performance**
 
-```text
-Training Samples: 
+ Accuracy: 97.83%
+
+
+Precision:
+
+Real Jobs (0): 97%
+
+Fake Jobs (1): 99%
+
+
+Recall:
+
+Real Jobs (0): 99%
+
+Fake Jobs (1): 97%
+ 
+
+F1 Score:
+
+Real Jobs (0): 98%
+
+Fake Jobs (1): 98%
+
+**Confusion Matrix**
+
+Actual / Predicted	Real	Fake
+Real	306	3
+
+Fake	10	281
+
+**Results:**
+
+Achieved 97.83% classification accuracy on the test dataset.
+
+The model correctly classified 587 out of 600 job postings.
